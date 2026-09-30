@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Something Special 🫣</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<main>
+
+
+    <!-- =====================================
+         WELCOME SCREEN
+    ====================================== -->
+
+    <section
+        class="screen welcome"
+        id="welcome"
+    >
+
+        <div class="content">
+
+            <div class="welcome-heart">
+                ♥
+            </div>
+
+            <h1>
+                Hey You!🌟
+            </h1>
+
+            <p>
+                I have something special for you💌...
+            </p>
+
+            <button id="startButton">
+                Start 😎
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         BALLOON SCREEN
+    ====================================== -->
+
+    <section
+        class="screen balloons hidden"
+        id="balloonScreen"
+    >
+
+        <div class="content">
+
+            <h2>
+                Pop the Balloons 🎈
+            </h2>
+
+            <p>
+                Tap all four balloons
+            </p>
+
+
+            <div class="balloon-container">
+
+                <div class="pop-burst-layer"></div>
+
+
+                <div class="balloon balloon1">
+                    <span></span>
+                </div>
+
+
+                <div class="balloon balloon2">
+                    <span></span>
+                </div>
+
+
+                <div class="balloon balloon3">
+                    <span></span>
+                </div>
+
+
+                <div class="balloon balloon4">
+                    <span></span>
+                </div>
+
+            </div>
+
+
+            <p id="balloonMessage"></p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         FIRST BIRTHDAY SCREEN
+    ====================================== -->
+
+    <section
+        class="screen birthday hidden"
+        id="birthdayScreen"
+    >
+
+        <div class="birthday-background">
+
+            <div class="birthday-particle particle-1"></div>
+            <div class="birthday-particle particle-2"></div>
+            <div class="birthday-particle particle-3"></div>
+            <div class="birthday-particle particle-4"></div>
+            <div class="birthday-particle particle-5"></div>
+            <div class="birthday-particle particle-6"></div>
+            <div class="birthday-particle particle-7"></div>
+            <div class="birthday-particle particle-8"></div>
+            <div class="birthday-particle particle-9"></div>
+            <div class="birthday-particle particle-10"></div>
+            <div class="birthday-particle particle-11"></div>
+            <div class="birthday-particle particle-12"></div>
+
+            <div class="birthday-heart heart-1">♥</div>
+            <div class="birthday-heart heart-2">♥</div>
+            <div class="birthday-heart heart-3">♥</div>
+            <div class="birthday-heart heart-4">♥</div>
+            <div class="birthday-heart heart-5">♥</div>
+            <div class="birthday-heart heart-6">♥</div>
+
+            <div class="birthday-sparkle sparkle-1">✦</div>
+            <div class="birthday-sparkle sparkle-2">✧</div>
+            <div class="birthday-sparkle sparkle-3">✦</div>
+            <div class="birthday-sparkle sparkle-4">✧</div>
+            <div class="birthday-sparkle sparkle-5">✦</div>
+            <div class="birthday-sparkle sparkle-6">✧</div>
+
+        </div>
+
+
+        <div class="birthday-text">
+
+            <h1>
+                HAPPY BIRTHDAY🎁🎉
+            </h1>
+
+            <h2>
+                SONALI🎀💕
+            </h2>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         MEMORY SCREEN
+    ====================================== -->
+
+    <section
+        class="screen memories hidden"
+        id="memoryScreen"
+    >
+
+        <div class="floating-heart heart-a">♡</div>
+        <div class="floating-heart heart-b">♡</div>
+        <div class="floating-heart heart-c">♡</div>
+        <div class="floating-heart heart-d">♡</div>
+        <div class="floating-heart heart-e">♡</div>
+        <div class="floating-heart heart-f">♡</div>
+
+
+        <div class="content">
+
+            <h2 class="memory-title">
+                Our Memories
+                <span>♡</span>
+            </h2>
+
+
+            <p class="memory-subtitle">
+                Every moment with you is special ♥
+            </p>
+
+
+            <div class="video-wrapper">
+
+                <div class="frame-heart heart-top-left">♡</div>
+                <div class="frame-heart heart-top-center">♡</div>
+                <div class="frame-heart heart-top-right">♡</div>
+
+                <div class="frame-heart heart-left-one">♡</div>
+                <div class="frame-heart heart-left-two">♡</div>
+                <div class="frame-heart heart-left-three">♡</div>
+
+                <div class="frame-heart heart-right-one">♡</div>
+                <div class="frame-heart heart-right-two">♡</div>
+                <div class="frame-heart heart-right-three">♡</div>
+
+                <div class="frame-heart heart-bottom-left">♡</div>
+                <div class="frame-heart heart-bottom-center">♡</div>
+                <div class="frame-heart heart-bottom-right">♡</div>
+
+
+                <div class="video-frame">
+
+                    <video
+                        id="memoryVideo"
+                        playsinline
+                        autoplay
+                        muted
+                        preload="auto"
+                    >
+
+                        <source
+                            id="videoSource"
+                            src=""
+                            type="video/mp4"
+                        >
+
+                        Your browser does not support HTML5 video.
+
+                    </video>
+
+                </div>
+
+            </div>
+
+
+            <div class="video-counter">
+
+                <span id="currentVideo">
+                    1
+                </span>
+
+                <span>/</span>
+
+                <span>
+                    30
+                </span>
+
+            </div>
+
+
+            <div
+                class="heart-progress"
+                id="heartProgress"
+            ></div>
+
+
+            <p class="memory-bottom-text">
+                Every memory has a special place in my heart ♥
+            </p>
+
+
+            <button
+                id="letterButton"
+                class="next-page-button"
+            >
+                Next ⏭️
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         LETTER SCREEN
+    ====================================== -->
+
+    <section
+        class="screen letter hidden"
+        id="letterScreen"
+    >
+
+        <div class="letter-content">
+
+            <div
+                class="envelope-container"
+                id="envelopeContainer"
+            >
+
+                <div class="envelope">
+
+                    <div class="envelope-back"></div>
+
+
+                    <div class="letter-paper">
+
+                        <div class="letter-paper-content">
+
+                            <h3>
+                                My Dear Sonali ❤️
+                            </h3>
+
+                            <p>
+                                There are some moments in life
+                                that become memories forever.🥹
+                            </p>
+
+                            <p>
+                                Every moment spent with you
+                                is one of those special memories.🥰
+                            </p>
+
+                            <p>
+                                Thank you for being a beautiful
+                                part of my story. ❤️
+                            </p>
+
+                            <p>
+                                No matter where life takes us,
+                                I will always cherish the
+                                memories we have created together.🫂
+                            </p>
+
+                            <p class="letter-sign">
+                                With lots of love,<br>
+                                Ajulin Danish ❣️
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="envelope-front"></div>
+
+                    <div class="envelope-flap"></div>
+
+                    <div class="envelope-heart">
+                        ♥
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <p
+                class="open-letter-text"
+                id="openLetterText"
+            >
+                A little letter for you 💌
+            </p>
+
+
+            <button
+                id="onceAgainButton"
+                class="next-page-button letter-continue hidden"
+            >
+                Continue ⏭️
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         ONCE AGAIN SCREEN
+    ====================================== -->
+
+    <section
+        class="screen once-again hidden"
+        id="onceAgainScreen"
+    >
+
+        <div class="once-again-background">
+
+            <div class="once-heart once-heart-1">
+                ♥
+            </div>
+
+            <div class="once-heart once-heart-2">
+                ♥
+            </div>
+
+            <div class="once-heart once-heart-3">
+                ♡
+            </div>
+
+            <div class="once-heart once-heart-4">
+                ♡
+            </div>
+
+            <div class="once-sparkle once-sparkle-1">
+                ✦
+            </div>
+
+            <div class="once-sparkle once-sparkle-2">
+                ✧
+            </div>
+
+            <div class="once-sparkle once-sparkle-3">
+                ✦
+            </div>
+
+            <div class="once-sparkle once-sparkle-4">
+                ✧
+            </div>
+
+        </div>
+
+
+        <div class="once-again-content">
+
+            <div class="once-again-small">
+                And...
+            </div>
+
+            <h1>
+                Once Again...
+            </h1>
+
+            <div class="once-again-heart">
+                🫶
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         SECOND BIRTHDAY SCREEN
+    ====================================== -->
+
+    <section
+        class="screen birthday-second hidden"
+        id="birthdaySecondScreen"
+    >
+
+        <div class="second-birthday-sky">
+
+            <div class="moon"></div>
+
+            <div class="star star-1">✦</div>
+            <div class="star star-2">✧</div>
+            <div class="star star-3">✦</div>
+            <div class="star star-4">✧</div>
+            <div class="star star-5">✦</div>
+            <div class="star star-6">✧</div>
+            <div class="star star-7">✦</div>
+            <div class="star star-8">✧</div>
+            <div class="star star-9">✦</div>
+            <div class="star star-10">✧</div>
+
+            <div class="second-heart second-heart-1">
+                ♥
+            </div>
+
+            <div class="second-heart second-heart-2">
+                ♥
+            </div>
+
+            <div class="second-heart second-heart-3">
+                ♡
+            </div>
+
+            <div class="second-heart second-heart-4">
+                ♡
+            </div>
+
+            <div class="firefly firefly-1"></div>
+            <div class="firefly firefly-2"></div>
+            <div class="firefly firefly-3"></div>
+            <div class="firefly firefly-4"></div>
+            <div class="firefly firefly-5"></div>
+            <div class="firefly firefly-6"></div>
+            <div class="firefly firefly-7"></div>
+            <div class="firefly firefly-8"></div>
+
+        </div>
+
+
+        <div class="second-birthday-content">
+
+            <div class="second-birthday-title">
+
+                <h1>
+                    HAPPY BIRTHDAY🎁🎉👑
+                </h1>
+
+                <h2>
+                    SONALI🎀💕
+                </h2>
+
+            </div>
+
+
+            <div class="birthday-quotes">
+
+                <p>
+                    May your life always be filled
+                    with beautiful moments and endless smiles. ❤️
+                </p>
+
+                <p>
+                    May every new year of your life
+                    bring you closer to all your dreams. ✨
+                </p>
+
+                <p>
+                    You deserve happiness, love,
+                    laughter and countless beautiful memories. 🥰
+                </p>
+
+            </div>
+
+
+            <button
+                id="secondBirthdayButton"
+                class="next-page-button"
+            >
+                Continue ⏭️
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         FINAL SCREEN
+    ====================================== -->
+
+    <section
+        class="screen final hidden"
+        id="finalScreen"
+    >
+
+        <div class="content">
+
+            <div class="final-heart">
+                👑
+            </div>
+
+            <h1>
+                Thank You ❤️
+            </h1>
+
+            <p>
+                For being a part of my story🫂💖
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =====================================
+     BIRTHDAY SONG
+====================================== -->
+
+<audio
+    id="birthdaySong"
+    src="./birthday-song.mp3"
+    preload="auto"
+    loop
+></audio>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
