@@ -13,19 +13,6 @@ let birthdayMusicStarted = false;
    VIDEO ROTATION SETTINGS
 ========================================= */
 
-/*
-   -90 degrees:
-   1, 2, 4, 5, 7, 9, 10, 12, 13, 14,
-   16, 17, 19, 20, 22, 23, 24, 25, 26,
-   28, 29, 30
-
-   +90 degrees:
-   8, 11, 15
-
-   Normal:
-   3, 6, 18, 21, 27
-*/
-
 const rotateMinus90 = new Set([
     1, 2, 4, 5, 7,
     9, 10, 12, 13, 14,
@@ -140,6 +127,17 @@ function startBirthdayMusic() {
     }
 
 
+    /*
+       Do not start music if the tab is hidden.
+    */
+
+    if (document.hidden) {
+
+        return;
+
+    }
+
+
     birthdaySong.currentTime = 0;
     birthdaySong.volume = 1.0;
     birthdaySong.loop = true;
@@ -157,7 +155,7 @@ function startBirthdayMusic() {
                 birthdayMusicStarted = true;
 
                 console.log(
-                    "Birthday music started after fourth balloon."
+                    "Birthday music started."
                 );
 
             })
@@ -182,12 +180,24 @@ function startBirthdayMusic() {
 
 
 /* =========================================
-   TRY MUSIC AGAIN IF REQUIRED
+   ENSURE MUSIC
 ========================================= */
 
 function ensureBirthdayMusic() {
 
     if (!birthdaySong) {
+
+        return;
+
+    }
+
+
+    /*
+       Never restart music when the tab
+       is hidden.
+    */
+
+    if (document.hidden) {
 
         return;
 
@@ -222,17 +232,48 @@ function ensureBirthdayMusic() {
 
 
 /* =========================================
-   STOP MUSIC WHEN PAGE IS LEFT
+   STOP MUSIC COMPLETELY
 ========================================= */
 
-window.addEventListener(
-    "pagehide",
+function stopBirthdayMusic() {
+
+    if (!birthdaySong) {
+
+        return;
+
+    }
+
+
+    birthdaySong.pause();
+
+    birthdaySong.currentTime = 0;
+
+    birthdayMusicStarted = false;
+
+}
+
+
+/* =========================================
+   STOP MUSIC WHEN TAB IS HIDDEN
+========================================= */
+
+document.addEventListener(
+    "visibilitychange",
     function () {
 
-        if (birthdaySong) {
+        if (document.hidden) {
 
-            birthdaySong.pause();
-            birthdaySong.currentTime = 0;
+            /*
+               User switched to another tab,
+               minimized Chrome, locked the screen,
+               or otherwise hid the page.
+            */
+
+            stopBirthdayMusic();
+
+            console.log(
+                "Birthday music stopped because the page is hidden."
+            );
 
         }
 
@@ -240,16 +281,29 @@ window.addEventListener(
 );
 
 
+/* =========================================
+   STOP MUSIC WHEN PAGE IS LEFT
+========================================= */
+
+window.addEventListener(
+    "pagehide",
+    function () {
+
+        stopBirthdayMusic();
+
+    }
+);
+
+
+/* =========================================
+   STOP MUSIC BEFORE CLOSING
+========================================= */
+
 window.addEventListener(
     "beforeunload",
     function () {
 
-        if (birthdaySong) {
-
-            birthdaySong.pause();
-            birthdaySong.currentTime = 0;
-
-        }
+        stopBirthdayMusic();
 
     }
 );
@@ -891,10 +945,6 @@ function fitRotatedVideo() {
        ROTATED VIDEOS
     ====================================== */
 
-    /*
-       Reset the video sizing first.
-    */
-
     memoryVideo.style.width =
         "100%";
 
@@ -906,12 +956,8 @@ function fitRotatedVideo() {
 
 
     /*
-       Give the rotated video a larger
-       scale so it fills the frame
-       vertically.
-
-       This is especially important
-       for video 14.
+       Video 14 needs a little more
+       enlargement.
     */
 
     let scale = 1;
@@ -921,21 +967,11 @@ function fitRotatedVideo() {
         currentVideoIndex === 14
     ) {
 
-        /*
-           Video 14 needs a stronger
-           enlargement.
-        */
-
         scale = 1.75;
 
     }
 
     else {
-
-        /*
-           Other rotated videos keep
-           the normal enlargement.
-        */
 
         scale = 1.55;
 
