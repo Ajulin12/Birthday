@@ -111,7 +111,6 @@ const birthdaySong =
 if (birthdaySong) {
 
     birthdaySong.volume = 1.0;
-
     birthdaySong.loop = true;
 
 }
@@ -141,13 +140,8 @@ function startBirthdayMusic() {
     }
 
 
-    birthdayMusicStarted = true;
-
-
     birthdaySong.currentTime = 0;
-
     birthdaySong.volume = 1.0;
-
     birthdaySong.loop = true;
 
 
@@ -159,6 +153,8 @@ function startBirthdayMusic() {
 
         musicPromise
             .then(function () {
+
+                birthdayMusicStarted = true;
 
                 console.log(
                     "Birthday music started after fourth balloon."
@@ -172,15 +168,13 @@ function startBirthdayMusic() {
                     error
                 );
 
-                /*
-                   If the browser still blocks it,
-                   the next user interaction can try
-                   playing it again.
-                */
-
                 birthdayMusicStarted = false;
 
             });
+
+    } else {
+
+        birthdayMusicStarted = true;
 
     }
 
@@ -200,12 +194,27 @@ function ensureBirthdayMusic() {
     }
 
 
-    if (
-        birthdaySong.paused &&
-        !birthdayMusicStarted
-    ) {
+    if (birthdaySong.paused) {
 
-        startBirthdayMusic();
+        const musicPromise =
+            birthdaySong.play();
+
+
+        if (musicPromise !== undefined) {
+
+            musicPromise
+                .then(function () {
+
+                    birthdayMusicStarted = true;
+
+                })
+                .catch(function () {
+
+                    birthdayMusicStarted = false;
+
+                });
+
+        }
 
     }
 
@@ -223,7 +232,6 @@ window.addEventListener(
         if (birthdaySong) {
 
             birthdaySong.pause();
-
             birthdaySong.currentTime = 0;
 
         }
@@ -239,7 +247,6 @@ window.addEventListener(
         if (birthdaySong) {
 
             birthdaySong.pause();
-
             birthdaySong.currentTime = 0;
 
         }
@@ -340,7 +347,6 @@ const balloons =
 function createPopEffect(balloon) {
 
     const colors = [
-
         "#ff4778",
         "#ff668d",
         "#ff91ad",
@@ -349,7 +355,6 @@ function createPopEffect(balloon) {
         "#72caff",
         "#ffffff",
         "#ff8c42"
-
     ];
 
 
@@ -535,9 +540,7 @@ function createPopEffect(balloon) {
         );
 
 
-        burstLayer.appendChild(
-            dot
-        );
+        burstLayer.appendChild(dot);
 
 
         setTimeout(
@@ -608,9 +611,7 @@ function createPopEffect(balloon) {
         );
 
 
-        burstLayer.appendChild(
-            strip
-        );
+        burstLayer.appendChild(strip);
 
 
         setTimeout(
@@ -665,18 +666,10 @@ balloons.forEach(
                 poppedCount++;
 
 
-                /*
-                   =================================
+                /* =================================
                    FOURTH BALLOON
                    START SONG IMMEDIATELY
-                   =================================
-
-                   This is intentionally called
-                   directly from the balloon click.
-
-                   This gives the browser the user's
-                   click/tap permission to play audio.
-                */
+                ================================= */
 
                 if (
                     poppedCount === 4
@@ -741,15 +734,6 @@ balloons.forEach(
                                         );
 
                                     }
-
-
-                                    /*
-                                       DO NOT START THE SONG HERE.
-
-                                       It has already started
-                                       immediately after the
-                                       fourth balloon click.
-                                    */
 
 
                                     setTimeout(
@@ -851,7 +835,7 @@ function getVideoRotation() {
 
 
 /* =========================================
-   FIT ROTATED VIDEO INSIDE FRAME
+   FIT VIDEO INSIDE FRAME
 ========================================= */
 
 function fitRotatedVideo() {
@@ -881,15 +865,10 @@ function fitRotatedVideo() {
 
 
     /* =====================================
-       NORMAL VIDEO
+       NORMAL VIDEOS
     ====================================== */
 
-    if (
-        rotation === 0
-    ) {
-
-        memoryVideo.style.transform =
-            "rotate(0deg) scale(1)";
+    if (rotation === 0) {
 
         memoryVideo.style.width =
             "100%";
@@ -897,123 +876,70 @@ function fitRotatedVideo() {
         memoryVideo.style.height =
             "100%";
 
-        return;
+        memoryVideo.style.objectFit =
+            "contain";
 
-    }
-
-
-    const frameWidth =
-        videoFrame.clientWidth;
-
-    const frameHeight =
-        videoFrame.clientHeight;
-
-
-    if (
-        frameWidth <= 0 ||
-        frameHeight <= 0
-    ) {
+        memoryVideo.style.transform =
+            "rotate(0deg)";
 
         return;
 
     }
 
 
-    const videoWidth =
-        memoryVideo.videoWidth;
-
-    const videoHeight =
-        memoryVideo.videoHeight;
-
-
-    if (
-        videoWidth <= 0 ||
-        videoHeight <= 0
-    ) {
-
-        return;
-
-    }
-
-
-    const videoRatio =
-        videoWidth /
-        videoHeight;
-
-    const frameRatio =
-        frameWidth /
-        frameHeight;
-
-
-    let displayedWidth;
-
-    let displayedHeight;
-
-
-    if (
-        videoRatio >
-        frameRatio
-    ) {
-
-        displayedWidth =
-            frameWidth;
-
-        displayedHeight =
-            frameWidth /
-            videoRatio;
-
-    }
-
-    else {
-
-        displayedHeight =
-            frameHeight;
-
-        displayedWidth =
-            frameHeight *
-            videoRatio;
-
-    }
-
+    /* =====================================
+       ROTATED VIDEOS
+    ====================================== */
 
     /*
-       Rotation swaps width and height.
+       Reset the video sizing first.
     */
-
-    const rotatedWidth =
-        displayedHeight;
-
-    const rotatedHeight =
-        displayedWidth;
-
-
-    const scaleX =
-        frameWidth /
-        rotatedWidth;
-
-    const scaleY =
-        frameHeight /
-        rotatedHeight;
-
-
-    /*
-       Slightly smaller than the maximum
-       so the video stays comfortably
-       inside the frame.
-    */
-
-    const scale =
-        Math.min(
-            scaleX,
-            scaleY
-        ) * 0.98;
-
 
     memoryVideo.style.width =
         "100%";
 
     memoryVideo.style.height =
         "100%";
+
+    memoryVideo.style.objectFit =
+        "contain";
+
+
+    /*
+       Give the rotated video a larger
+       scale so it fills the frame
+       vertically.
+
+       This is especially important
+       for video 14.
+    */
+
+    let scale = 1;
+
+
+    if (
+        currentVideoIndex === 14
+    ) {
+
+        /*
+           Video 14 needs a stronger
+           enlargement.
+        */
+
+        scale = 1.75;
+
+    }
+
+    else {
+
+        /*
+           Other rotated videos keep
+           the normal enlargement.
+        */
+
+        scale = 1.55;
+
+    }
 
 
     memoryVideo.style.transform =
@@ -1122,7 +1048,7 @@ function updateVideo() {
 
 
 /* =========================================
-   REFIT VIDEO WHEN WINDOW RESIZES
+   REFIT WHEN WINDOW RESIZES
 ========================================= */
 
 window.addEventListener(
@@ -1239,10 +1165,6 @@ if (letterButton) {
         "click",
         function () {
 
-            /*
-               Make sure the song continues.
-            */
-
             ensureBirthdayMusic();
 
 
@@ -1290,8 +1212,6 @@ if (letterButton) {
             });
 
 
-            /* OPEN FLAP */
-
             setTimeout(
                 function () {
 
@@ -1303,8 +1223,6 @@ if (letterButton) {
                 900
             );
 
-
-            /* LETTER COMES OUT */
 
             setTimeout(
                 function () {
@@ -1318,8 +1236,6 @@ if (letterButton) {
             );
 
 
-            /* MESSAGE */
-
             setTimeout(
                 function () {
 
@@ -1330,8 +1246,6 @@ if (letterButton) {
                 3500
             );
 
-
-            /* CONTINUE BUTTON */
 
             setTimeout(
                 function () {
@@ -1433,7 +1347,7 @@ if (secondBirthdayButton) {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
-        });
+            });
 
         }
     );
